@@ -24,14 +24,17 @@ class _ToDoAppState extends State<ToDoApp> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  list.add(output);
-                });
-                Navigator.of(context).pop();
+                if (output != "") {
+                  setState(() {
+                    list.add(output);
+                  });
+                  Navigator.of(context).pop();
+                }
               },
               child: const Text('Add'),
             )
           ],
+          elevation: 10,
         );
       },
     );
@@ -55,6 +58,7 @@ class _ToDoAppState extends State<ToDoApp> {
               child: const Text('Delete'),
             )
           ],
+          elevation: 10,
         );
       },
     );
@@ -75,14 +79,17 @@ class _ToDoAppState extends State<ToDoApp> {
           actions: [
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  list[index] = output;
-                });
-                Navigator.of(context).pop();
+                if (output != "") {
+                  setState(() {
+                    list[index] = output;
+                  });
+                  Navigator.of(context).pop();
+                }
               },
               child: const Text('Update'),
             ),
           ],
+          elevation: 10,
         );
       },
     );
@@ -106,6 +113,7 @@ class _ToDoAppState extends State<ToDoApp> {
               child: const Text('Delete all'),
             ),
           ],
+          elevation: 10,
         );
       },
     );
@@ -117,13 +125,14 @@ class _ToDoAppState extends State<ToDoApp> {
       appBar: AppBar(
         title: const Text('Todo App'),
         actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 10),
-            child: GestureDetector(
-              onTap: deleteAllTodos,
-              child: const Icon(Icons.delete),
+          if (list.isNotEmpty)
+            Container(
+              margin: const EdgeInsets.only(right: 10),
+              child: GestureDetector(
+                onTap: deleteAllTodos,
+                child: const Icon(Icons.delete),
+              ),
             ),
-          ),
         ],
       ),
       body: ListView.builder(
