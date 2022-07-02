@@ -3,8 +3,16 @@ import 'package:flutterapp/widgets/circleAvatar_widget.dart';
 import 'package:flutterapp/widgets/listtile_widget.dart';
 import 'package:flutterapp/widgets/text_widget.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
+
+  @override
+  State<Dashboard> createState() => _DashboardState();
+}
+
+class _DashboardState extends State<Dashboard> {
+  Widget currentScreen = const Text('Screen 1');
+  int currentTab = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -12,289 +20,106 @@ class Dashboard extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Dashboard'),
       ),
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+      // body: SizedBox(
+      //   width: MediaQuery.of(context).size.width,
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.center,
+      //     crossAxisAlignment: CrossAxisAlignment.center,
+      //     children: const [
+      //       DefaultTabController(
+      //         length: 2,
+      //         initialIndex: 0,
+      //         child: TabBar(
+      //           tabs: [
+      //             Tab(
+      //               child: Text(
+      //                 'Todos',
+      //                 style: TextStyle(color: Colors.black),
+      //               ),
+      //             ),
+      //             Tab(
+      //               child: Text(
+      //                 'Stats',
+      //                 style: TextStyle(color: Colors.black),
+      //               ),
+      //             ),
+      //           ],
+      //         ),
+      //       ),
+      //       Expanded(
+      //         child: DefaultTabController(
+      //           length: 2,
+      //           initialIndex: 0,
+      //           child: TabBarView(
+      //             children: [
+      //               Text('tab 1'),
+      //               Text('tab 2'),
+      //             ],
+      //           ),
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      // ),
+      body: Center(
+        child: currentScreen,
+      ),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          color: Colors.blue,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Expanded(
-            //   child: ListView(
-            //     scrollDirection: Axis.horizontal,
-            //     children: [
-            //       Container(
-            //         margin: const EdgeInsets.only(right: 2),
-            //         color: Colors.yellow,
-            //         width: 200,
-            //         height: 50,
-            //       ),
-            //       Container(
-            //         margin: const EdgeInsets.only(right: 2),
-            //         color: Colors.yellow,
-            //         width: 200,
-            //         height: 50,
-            //       ),
-            //       Container(
-            //         margin: const EdgeInsets.only(right: 2),
-            //         color: Colors.yellow,
-            //         width: 200,
-            //         height: 50,
-            //       ),
-            //       Container(
-            //         margin: const EdgeInsets.only(right: 2),
-            //         color: Colors.yellow,
-            //         width: 200,
-            //         height: 50,
-            //       ),
-            //       Container(
-            //         margin: const EdgeInsets.only(right: 2),
-            //         color: Colors.yellow,
-            //         width: 200,
-            //         height: 50,
-            //       ),
-            //       Container(
-            //         margin: const EdgeInsets.only(right: 2),
-            //         color: Colors.yellow,
-            //         width: 200,
-            //         height: 50,
-            //       ),
-            //       Container(
-            //         margin: const EdgeInsets.only(right: 2),
-            //         color: Colors.yellow,
-            //         width: 200,
-            //         height: 50,
-            //       ),
-            //       Container(
-            //         margin: const EdgeInsets.only(right: 2),
-            //         color: Colors.yellow,
-            //         width: 200,
-            //         height: 50,
-            //       ),
-            //     ],
-            //   ),
-            // ),
-            // Container(
-            //   margin: const EdgeInsets.only(top: 2),
-            //   color: Colors.red,
-            //   width: MediaQuery.of(context).size.width * .95,
-            //   height: MediaQuery.of(context).size.height * .5,
-            // ),
-            // Expanded(
-            //   child: ListView(
-            //     children: [
-            //       listTileWidget(
-            //         leading: circleAvatarWidget(
-            //           image: const AssetImage('assets/avatar.png'),
-            //         ),
-            //         title: textWidget('Hashir'),
-            //         subtitle: textWidget(
-            //           'Flutter Developer',
-            //           color: Colors.black54,
-            //         ),
-            //         trailing: textWidget('12:34 AM'),
-            //       ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //       // listTileWidget(
-            //       //   leading: circleAvatarWidget(
-            //       //     image: const AssetImage('assets/avatar.png'),
-            //       //   ),
-            //       //   title: textWidget('Hashir'),
-            //       //   subtitle: textWidget(
-            //       //     'Flutter Developer',
-            //       //     color: Colors.black54,
-            //       //   ),
-            //       //   trailing: textWidget('12:34 AM'),
-            //       // ),
-            //     ],
-            //   ),
-            // ),
-            // listTileWidget(
-            //   leading: circleAvatarWidget(),
-            //   title: textWidget('Hashir'),
-            //   subtitle: textWidget(
-            //     'Flutter Developer',
-            //     color: Colors.black54,
-            //   ),
-            //   trailing: textWidget('12:34 AM'),
-            // ),
-            // listTileWidget(
-            //   leading: circleAvatarWidget(),
-            //   title: textWidget('Hashir'),
-            //   subtitle: textWidget(
-            //     'Flutter Developer',
-            //     color: Colors.black54,
-            //   ),
-            //   trailing: textWidget('12:34 AM'),
-            // ),
-            // listTileWidget(
-            //   leading: circleAvatarWidget(),
-            //   title: textWidget('Hashir'),
-            //   subtitle: textWidget(
-            //     'Flutter Developer',
-            //     color: Colors.black54,
-            //   ),
-            //   trailing: textWidget('12:34 AM'),
-            // ),
-            // containerWidget(textWidget('data 1'),
-            //     color: Colors.red, width: 150.0, height: 150.0),
-            // containerWidget(
-            //     textWidget('data 2', fontSize: 35.0, color: Colors.redAccent),
-            //     color: Colors.green),
-            // const PopularProducts()
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.pop(context);
-            //   },
-            //   child: const Text('go back'),
-            // )
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Container(
-                  width: 200,
-                  height: 200,
-                  color: Colors.red,
-                ),
-                Positioned(
-                  child: Container(
-                    width: 130,
-                    height: 130,
-                    color: const Color(0xf0ff7722),
-                  ),
-                ),
-              ],
-            )
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentScreen = const Text('Screen 1');
+                  currentTab = 0;
+                });
+              },
+              icon: Icon(
+                Icons.home,
+                color: currentTab == 0 ? Colors.white : Colors.white60,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentScreen = const Text('Screen 2');
+                  currentTab = 1;
+                });
+              },
+              icon: Icon(
+                Icons.info,
+                color: currentTab == 1 ? Colors.white : Colors.white60,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentScreen = const Text('Screen 3');
+                  currentTab = 2;
+                });
+              },
+              icon: Icon(
+                Icons.work,
+                color: currentTab == 2 ? Colors.white : Colors.white60,
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                setState(() {
+                  currentScreen = const Text('Screen 4');
+                  currentTab = 3;
+                });
+              },
+              icon: Icon(
+                Icons.phone,
+                color: currentTab == 3 ? Colors.white : Colors.white60,
+              ),
+            ),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ToDoApp extends StatefulWidget {
   const ToDoApp({Key? key}) : super(key: key);
@@ -8,8 +9,10 @@ class ToDoApp extends StatefulWidget {
 }
 
 class _ToDoAppState extends State<ToDoApp> {
-  List<dynamic> list = [];
-  dynamic output = "";
+  final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+  List<String> list = [];
+  String output = "";
 
   addToDo() {
     showDialog(
@@ -27,6 +30,9 @@ class _ToDoAppState extends State<ToDoApp> {
                 if (output != "") {
                   setState(() {
                     list.add(output);
+                  });
+                  _prefs.then((prefs) {
+                    prefs.setStringList('todo', list);
                   });
                   Navigator.of(context).pop();
                 }
@@ -52,6 +58,9 @@ class _ToDoAppState extends State<ToDoApp> {
               onPressed: () {
                 setState(() {
                   list.removeAt(index);
+                });
+                _prefs.then((prefs) {
+                  prefs.setStringList('todo', list);
                 });
                 Navigator.of(context).pop();
               },
@@ -83,6 +92,9 @@ class _ToDoAppState extends State<ToDoApp> {
                   setState(() {
                     list[index] = output;
                   });
+                  _prefs.then((prefs) {
+                    prefs.setStringList('todo', list);
+                  });
                   Navigator.of(context).pop();
                 }
               },
@@ -108,6 +120,9 @@ class _ToDoAppState extends State<ToDoApp> {
                 setState(() {
                   list.clear();
                 });
+                _prefs.then((prefs) {
+                  prefs.setStringList('todo', list);
+                });
                 Navigator.of(context).pop();
               },
               child: const Text('Delete all'),
@@ -117,6 +132,16 @@ class _ToDoAppState extends State<ToDoApp> {
         );
       },
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _prefs.then((prefs) {
+      setState(() {
+        list = prefs.getStringList('todo') ?? [];
+      });
+    });
   }
 
   @override
